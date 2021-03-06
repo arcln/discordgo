@@ -416,7 +416,7 @@ func (s *Session) UserChannelCreate(recipientID string) (st *Channel, err error)
 // limit     : The number guilds that can be returned. (max 100)
 // beforeID  : If provided all guilds returned will be before given ID.
 // afterID   : If provided all guilds returned will be after given ID.
-func (s *Session) UserGuilds(limit int, beforeID, afterID string) (st []*UserGuild, err error) {
+func (s *Session) UserGuilds(userID string, limit int, beforeID, afterID string) (st []*UserGuild, err error) {
 
 	v := url.Values{}
 
@@ -430,7 +430,7 @@ func (s *Session) UserGuilds(limit int, beforeID, afterID string) (st []*UserGui
 		v.Set("before", beforeID)
 	}
 
-	uri := EndpointUserGuilds("@me")
+	uri := EndpointUserGuilds(userID)
 
 	if len(v) > 0 {
 		uri += "?" + v.Encode()
